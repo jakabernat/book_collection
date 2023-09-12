@@ -1,16 +1,10 @@
-<%= link_to("Back to Homepage", books_path, :class => 'back-link') %>
+<h1>Editing book</h1>
 
-<div class="books edit">
-  <h2>Edit book</h2>
+<%= render "form", book: @book %>
 
-  <%= form_for(@book) do |f| %>
-    <% # url: book_path(@book), method: 'patch' %>
+<br>
 
-    <%= render(partial: 'form', locals: {f: f}) %>
-
-    <div class="form-buttons">
-      <%= f.submit("Edit Book") %>
-    </div>
-
-  <% end %>
+<div>
+  <%= link_to "Show this book", @book %> |
+  <%= link_to "Back to books", books_path %>
 </div>

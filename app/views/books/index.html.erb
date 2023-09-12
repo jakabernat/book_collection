@@ -1,35 +1,14 @@
+<p style="color: green"><%= notice %></p>
 
-<div class="books index">
-  <% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
-    </div>
+<h1>Books</h1>
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+    <p>
+      <%= link_to "Show this book", book %>
+    </p>
   <% end %>
-  <h2>Books</h2>
-
-  <%= link_to("Add New book", new_book_path, class: 'action new') %>
-
-  <table class="listing" summary="Book list" style="width: 100%;">
-    <tr class="header">
-      <th>#</th>
-      <th>Book</th>
-      <th>Author</th>
-      <th>Price</th>
-      <th>Published Date</th>
-    </tr>
-    <% @books.each do |book| %>
-    <tr>
-      <td><%= book.id %></td>
-      <td><%= book.title %></td>
-      <td><%= book.author %></td>
-      <td><%= book.price %></td>
-      <td><%= book.publishedDate %></td>
-      <td class="actions">
-        <%= link_to("Show", book_path(book), class: 'action show') %>
-        <%= link_to("Edit", edit_book_path(book), class: 'action edit') %>
-        <%= link_to("Delete", delete_book_path(book), class: 'action delete') %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
 </div>
+
+<%= link_to "New book", new_book_path %>

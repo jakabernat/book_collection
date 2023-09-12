@@ -1,34 +1,35 @@
-# location: spec/unit/unit_spec.rb
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  subject do
-    described_class.new(title: 'harry potter')
-  end
+  context 'validations' do
+    it 'is valid with valid attributes' do
+      book = Book.new(
+        title: 'Sample Book',
+        author: 'Author Name',
+        price: 19.99,
+        published: Date.today
+      )
+      expect(book).to be_valid
+    end
 
-#, :author 'J.K. Rowling', :price 10.99, :publishedDate '2004-08-05'
+    it 'is not valid without a title' do
+      book = Book.new(title: nil)
+      expect(book).to_not be_valid
+    end
 
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
-  end
+    it 'is not valid without an author' do
+      book = Book.new(author: nil)
+      expect(book).to_not be_valid
+    end
 
-  it 'is not valid without a title' do
-    subject.title = nil
-    expect(subject).not_to be_valid
-  end
+    it 'is not valid without a price' do
+      book = Book.new(price: nil)
+      expect(book).to_not be_valid
+    end
 
-  it 'is not valid without a price' do
-    subject.price = nil
-    expect(subject).not_to be_valid
-  end
-
-  it 'is not valid without an author' do
-    subject.author = nil
-    expect(subject).not_to be_valid
-  end
-
-  it 'is not valid without a date' do
-    subject.date = nil
-    expect(subject).not_to be_valid
+    it 'is not valid without a published date' do
+      book = Book.new(published: nil)
+      expect(book).to_not be_valid
+    end
   end
 end
