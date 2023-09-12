@@ -1,28 +1,30 @@
 Rails.application.routes.draw do
-  # Define the root path route ("/")
-  root "home#index"
+  root "main#index"
 
-  # Define routes for a resource (e.g., "articles")
-  resources :articles
+  match 'about', to: "main#about", via: :get
+  match 'hello', to: "main#hello", via: :get
 
-  # Define custom routes
-  get "/about", to: "home#about"
-  get "/contact", to: "home#contact"
+  get 'main/index'
 
-  # Define routes for nested resources
-  resources :authors do
-    resources :books
+  resources :books do
+    member do
+      get :delete
+    end
   end
 
-  # Define routes with constraints
-  get "/posts/:id", to: "posts#show", constraints: { id: /\d+/ }
+  # get 'tasks/index'
+  # get 'tasks/new'
+  # get 'tasks/edit'
+  # get 'tasks/show'
+  # get 'tasks/delete'
+  # get 'categories/index'
+  # get 'categories/show'
+  # get 'categories/new'
+  # get 'categories/edit'
+  # get 'categories/delete'
 
-  # Define a route with a custom URL
-  get "/custom-url", to: "custom#action"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Define routes with names
-  get "/dashboard", to: "admin#dashboard", as: :admin_dashboard
-
-  # Define a catch-all route for 404 errors
-  get "*unmatched_route", to: "errors#not_found"
+  # Defines the root path route ("/")
+  # root "articles#index"
 end
